@@ -30,6 +30,10 @@ module.exports = (sequelize, DataTypes) => {
     downvotes: { 
       type: DataTypes.INTEGER,
     },
+    acceptedAnswer: {
+      type: DataTypes.BOOLEAN,
+      default: false
+    }
     
   }, 
   {

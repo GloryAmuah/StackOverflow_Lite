@@ -14,9 +14,16 @@
     "mysql2": "^2.3.3",
     "sequelize": "^6.23.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "axios": "^0.27.2",
+    "chai": "^4.3.6",
+    "mocha":"^10.0.0",
+    "test": "mocha"
+  },
   "scripts": {
-    "devStart": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "test": "./node_modules/.bin/_mocha"
+
   },
   "keywords": [],
   "author": "Glory Amuah",

@@ -14,6 +14,10 @@ module.exports = {
       downvotes: {
         type: DataTypes.INTEGER
       },
+      answerId: {
+        allowNull: false,
+        type: DataTypes.INTEGER
+      },
       createdAt: {
         allowNull: false,
         type: DataTypes.DATE

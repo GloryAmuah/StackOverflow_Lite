@@ -30,6 +30,10 @@ module.exports = {
       downvotes: { 
         type: DataTypes.INTEGER,
       },
+      acceptedAnswer: {
+        type: DataTypes.BOOLEAN,
+        default: false
+      },
       createdAt: {
         allowNull: false,
         type: DataTypes.DATE

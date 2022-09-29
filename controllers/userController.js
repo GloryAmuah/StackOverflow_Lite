@@ -4,70 +4,75 @@ const jwt = require('jsonwebtoken')
 const user = require('../models/user')
 
 const register = async (req, res) => {
-    const checkEmail = await models.User.findOne({ where: { email: req.body.email }})
-        if (checkEmail) {
-            res.status(400).json({ message: "Email already exists" })
-        } else {
-            bcryptjs.genSalt(10, (err, salt) => {
-                bcryptjs.hash(req.body.password, salt, async (err, hash) => {
-                    const user = {
-                        name: req.body.name,
-                        email: req.body.email,
-                        password: hash
-                    }
-                    try {
-                        await models.User.create(user)
-                        return res.status(200).json({ message: "User created successfuly" })
-                
-                    } catch(err) {
-                        console.log(err)
-                        res.status(500).json({ message: "Something went wrong" })
-                
-                
-                    }
-                    
-        
-                })
-            })
-        }       
- 
+    try {
+        const checkEmail = await models.User.findOne({ where: { email: req.body.email } })
+        if (checkEmail) throw new Error ("User already exists")
+        const hashedPassword = await bcryptjs.hash(req.body.password, 10)
+
+        const payload = {
+            name: req.body.name,
+            email: req.body.email,
+            password: hashedPassword
+        }
+        const newUser = await models.User.create(payload)
+        res.json({
+            isSuccess: true,
+            message: `Successfully registered ${newUser.name}`,
+            data: {
+                email: newUser.email
+            }
+        })
+        } catch (error) {
+        res.status(400).json({
+            isSuccess: false,
+            message: error.message,
+            data: null
+        })
+
+
+    }
 }
 
 const login = async (req, res) => {
-    const userMatch = await models.User.findOne({ where: { email: req.body.email }})
+    try {
+        const userMatch = await models.User.findOne({ where: { email: req.body.email } })
 
-    if (!userMatch){
-        res.status(400).json({ message: "User not found" })
-    } else {
-        bcryptjs.compare(req.body.password, userMatch.password, (err, result) => {
-            
-            if(result){
-                const token = jwt.sign({
-                    email: user.email,
-                    userId: user.id,
-                }, process.env.JWT_KEY, function (err, token) {
-                    res.status(200).json({ message: "Authentication successful", token: token
-                
-                })
-                
-                }) 
-            } else  {
-                res.status(400).json({ message: "Invalid Credentials" })
+        if (!userMatch) throw new Error("User does not exist.")
 
+        const isValidPassword = await bcryptjs.compare(req.body.password, userMatch.password)
+
+        if (!isValidPassword) throw new Error("Invalid password")
+
+        const token = jwt.sign({
+            email: userMatch.email,
+            userId: userMatch.id,
+        }, process.env.JWT_KEY)
+
+        res.json({
+            isSuccess: true,
+            message: "You are now signed in ....",
+            data: {
+                token
             }
         })
-    } 
+    } catch (error) {
+        res.status(400).json({
+            isSuccess: false,
+            message: error.message,
+            data: null
+        })
+    }
 }
 
-// // Get all users
-// const getAllUsers = async (req, res) => {
-//     try{
-//         const users = await User.findAll()
-//         return res.json(users)
-//     } catch(err){
-//         console.log(err)
-//         return res.status(500).json({ error: 'Something went wrong' })
-//     }
-// }
+// Get all users
+const getAllUsers = async (req, res) => {
+    try{
+        const users = await models.User.findAll()
+        return res.json(users)
+    } catch(err){
+        console.log(err)
+        return res.status(500).json({ error: 'Something went wrong' })
+    }
+}
 
 module.exports = { register, login }
