@@ -17,8 +17,7 @@
   "devDependencies": {
     "axios": "^0.27.2",
     "chai": "^4.3.6",
-    "mocha":"^10.0.0",
-    "test": "mocha"
+    "mocha":"^10.0.0"
   },
   "scripts": {
     "dev": "nodemon app.js",
