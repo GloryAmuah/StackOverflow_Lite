@@ -26,6 +26,9 @@
     "test": "./node_modules/.bin/_mocha"
 
   },
+  "engines": {
+    "node": "14.x"
+  },
   "keywords": [],
   "author": "Glory Amuah",
   "license": "ISC"
