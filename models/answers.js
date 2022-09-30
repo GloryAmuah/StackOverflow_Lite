@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4
     },
-    body: {
+    answer: {
       allowNull: false,
       type: DataTypes.STRING
     },

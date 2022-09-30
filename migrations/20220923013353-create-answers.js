@@ -16,7 +16,7 @@ module.exports = {
         allowNull: false,
         type: DataTypes.INTEGER
       },
-      body: {
+      answer: {
         allowNull: false,
         type: DataTypes.STRING
       },

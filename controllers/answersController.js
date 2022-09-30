@@ -4,15 +4,27 @@ const app = require('../app')
 
 //Post an answer to a question
 const addAnswer = async (req, res) => {
-    const { body } = req.body
+    const { answer } = req.body
     const id  = req.params.id
     const userId = req.userId
     
     try{
-        const postAnswer = await models.answers.create({ body, questionId: id, userId })
-        res.json(postAnswer)
+        const postAnswer = await models.answers.create({ answer, questionId: id, userId })
+        res.json({
+            is_success: true,
+            message: "Successfully posted an answer",
+            data: {
+                id: postAnswer.id,
+                answer: postAnswer.answer
+            }
+        })
     } catch (err){
-        return res.status(500).json({ error: err.message })
+        return res.status(400).json({
+            is_success: false,
+            message: err.message,
+            data: null,
+          })
+  
     };
 
 }
@@ -23,27 +35,39 @@ const fetchAnswers = async (req, res) => {
     try{
         const fetchAllAnswers = await models.answers.findAll()
         
-    res.json(fetchAllAnswers)
+    res.json({
+        is_success: Boolean,
+        message: String,
+        data: {
+           // data to return to client, if any
+        }
+})
     } catch (err){
         console.log(err)
-        return res.status(500).json({ error: err.message })
+        return res.status(400).json({ error: err.message })
     };
 
 };
 
 //Comment on an answer
 const commentAnswer = async (req, res) => {
-    const { body } = req.body
+    const { comment } = req.body
     const id  = req.params.id
     const userId = req.userId
     
     try{
-        const postComment = await models.comments.create({  userId, body, answerId: id })
+        const postComment = await models.comments.create({  userId, comment, answerId: id })
         
-        res.json(postComment)
+        res.json({
+            is_success: Boolean,
+            message: String,
+            data: {
+               // data to return to client, if any
+            }
+ })
     } catch (err){
         console.log(err)
-        return res.status(500).json({ error: err.message })
+        return res.status(400).json({ error: err.message })
     };
 
 };
@@ -64,9 +88,15 @@ const acceptAnswer = async (req, res) => {
         );
 
         if(voteResult[0] < 1) { res.status(500).json({ message: "Something went wrong" }) }
-        res.status(200).json({ message: "Answer accepted"})
+        res.status(200).json({
+            is_success: Boolean,
+            message: String,
+            data: {
+               // data to return to client, if any
+            }
+ })
         } catch(err) {
-        return res.status(500).json({ error: err.message })
+        return res.status(400).json({ error: err.message })
         }
     
 };
@@ -88,7 +118,7 @@ const upvoteAnswer = async (req, res) => {
         )
         res.status(200).json({ msg: "Answer Upvoted" });
         } catch (err) {
-        return res.status(500).json({ error: err.message })
+        return res.status(400).json({ error: err.message })
     };
 };
 
@@ -104,12 +134,12 @@ const downvoteAnswer = async (req, res) => {
         })
 
         const voteResult = await models.answers.update(
-        { downvotes: answerToDownvote.downvotes + 1 },
+        { downvotes: answerToDownvote.downvotes - 1 },
         { where: { id: id } }
         )
         res.status(200).json({ msg: "Answer Downvoted" });
         } catch (err){
-        return res.status(500).json({ error: err.message })
+        return res.status(400).json({ error: err.message })
     };
 }
 

@@ -12,7 +12,7 @@ module.exports = {
         primaryKey: true,
         type: DataTypes.INTEGER
       },
-      body: {
+      comment: {
         allowNull: false,
         type: DataTypes.STRING
       },

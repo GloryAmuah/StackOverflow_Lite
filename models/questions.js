@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.STRING
     },
-    body: { 
+    question: { 
       allowNull: false,
       type: DataTypes.STRING
     },

@@ -1,8 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser')
-const { includes } = require('lodash');
-const { REPL_MODE_SLOPPY } = require('repl');
 const { sequelize } = require('./models');
+//const PORT = require('./config')
 
 const app = express();
 
@@ -13,14 +12,15 @@ const answersRoute = require('./routes/answers');
 app.use(express.json());
 app.use(bodyParser.json());
 
-app.use('/user', userRoute);
+app.use('/', userRoute);
 app.use('/questions', questionsRoute);
-app.use('/', answersRoute);
+app.use('/answers', answersRoute);
 
 app.listen({ port: 3000 }, async () => {
-    console.log('Server is running on http://localhost:3000')
+    console.log(`Sever running on port 3000`)
     await sequelize.authenticate()
     console.log('Database connected!')
+    
 })
 
 module.exports = app

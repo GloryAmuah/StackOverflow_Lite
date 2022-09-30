@@ -16,7 +16,7 @@ module.exports = {
         allowNull: false,
         type: DataTypes.STRING
       },
-      body: {
+      question: {
         allowNull: false,
         type: DataTypes.STRING
       },
