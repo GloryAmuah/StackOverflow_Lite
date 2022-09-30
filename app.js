@@ -15,8 +15,9 @@ app.use('/', userRoute);
 app.use('/questions', questionsRoute);
 app.use('/answers', answersRoute);
 
-app.listen({ port: 3000 }, async () => {
-    console.log(`Sever running on port 3000`)
+var PORT = process.env.PORT || 3000;
+app.listen({ port: PORT }, async () => {
+    console.log(`Sever running on port ${PORT}`)
     await sequelize.authenticate()
     console.log('Database connected!')
     
