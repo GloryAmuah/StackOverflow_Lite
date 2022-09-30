@@ -33,12 +33,9 @@ const fetchAllQuestions = async (req, res) => {
         const response = {
             is_success: true,
             message: "Questions successfully fetched",
-            data: { 
-                
-            }
+            data: getQuestion
         }
         res.json(response)
-        res.json(getQuestion)
     } catch (err) {
         return res.status(500).json({ error: err.message })
     }

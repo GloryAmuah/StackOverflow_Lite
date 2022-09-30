@@ -36,11 +36,9 @@ const fetchAnswers = async (req, res) => {
         const fetchAllAnswers = await models.answers.findAll()
         
     res.json({
-        is_success: Boolean,
-        message: String,
-        data: {
-           // data to return to client, if any
-        }
+        is_success: true,
+        message: "Question answered",
+        data: fetchAllAnswers
 })
     } catch (err){
         console.log(err)
@@ -59,11 +57,9 @@ const commentAnswer = async (req, res) => {
         const postComment = await models.comments.create({  userId, comment, answerId: id })
         
         res.json({
-            is_success: Boolean,
-            message: String,
-            data: {
-               // data to return to client, if any
-            }
+            is_success: true,
+            message: "Comment added",
+            data: postComment
  })
     } catch (err){
         console.log(err)
@@ -87,14 +83,14 @@ const acceptAnswer = async (req, res) => {
         { where: { id: id }}
         );
 
-        if(voteResult[0] < 1) { res.status(500).json({ message: "Something went wrong" }) }
+        //if(voteResult[0] < 1) { res.status(500).json({ message: "Something went wrong" }) }
         res.status(200).json({
-            is_success: Boolean,
-            message: String,
-            data: {
-               // data to return to client, if any
-            }
- })
+            is_success: true,
+            message: "Answer has been accepted",
+            data: {}
+        
+               
+        })
         } catch(err) {
         return res.status(400).json({ error: err.message })
         }
