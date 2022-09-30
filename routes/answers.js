@@ -11,10 +11,7 @@ router.put('/:id/accept', checkAuthMiddleware.checkAuth, answersController.accep
 router.put('/:id/upvote', checkAuthMiddleware.checkAuth, answersController.upvoteAnswer)//upvote an answer
 router.put('/:id/downvote', checkAuthMiddleware.checkAuth, answersController.downvoteAnswer)//downvote an answer
 
-//router.post('/answers/comments/:id', checkAuthMiddleware.checkAuth, answersController.commentAnswer)//comment on an answer
-// router.put('/answers/accept/:id', checkAuthMiddleware.checkAuth, answersController.acceptAnswer)//accept an answer
-// router.put('/answers/upvote/:id', checkAuthMiddleware.checkAuth, answersController.upvoteAnswer)//upvote an answer
-// router.put('/answers/downvote/:id', checkAuthMiddleware.checkAuth, answersController.downvoteAnswer)//downvote an answer
+
 
 
 module.exports = router;
