@@ -5,7 +5,7 @@ const models = require('../models')
 
 const QUES_URL = 'http://localhost:3000/questions'
 
-const id = userId
+//const id = userId
 
 
 describe('Test Questions', function () {
