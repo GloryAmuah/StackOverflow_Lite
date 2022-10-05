@@ -5,7 +5,7 @@ const user = require('../models/user')
 
 const register = async (req, res) => {
     try {
-        const checkEmail = await models.User.findOne({ where: { email: req.body.email } })
+        const checkEmail = await models.User.findOne({ where: { email: req.body.email }, raw: true })
         if (checkEmail) throw new Error ("User already exists")
         const hashedPassword = await bcryptjs.hash(req.body.password, 10)
 
