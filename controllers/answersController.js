@@ -42,7 +42,11 @@ const fetchAnswers = async (req, res) => {
 })
     } catch (err){
         console.log(err)
-        return res.status(400).json({ error: err.message })
+        return res.status(400).json({
+            is_success: false,
+            message: err.message,
+            data: null,
+          })
     };
 
 };
@@ -63,7 +67,11 @@ const commentAnswer = async (req, res) => {
  })
     } catch (err){
         console.log(err)
-        return res.status(400).json({ error: err.message })
+        return res.status(400).json({
+            is_success: false,
+            message: err.message,
+            data: null,
+          })
     };
 
 };
@@ -92,7 +100,11 @@ const acceptAnswer = async (req, res) => {
                
         })
         } catch(err) {
-        return res.status(400).json({ error: err.message })
+        return res.status(400).json({
+            is_success: false,
+            message: err.message,
+            data: null,
+          })
         }
     
 };
@@ -114,7 +126,11 @@ const upvoteAnswer = async (req, res) => {
         )
         res.status(200).json({ msg: "Answer Upvoted" });
         } catch (err) {
-        return res.status(400).json({ error: err.message })
+        return res.status(400).json({
+            is_success: false,
+            message: err.message,
+            data: null,
+          })
     };
 };
 
@@ -135,7 +151,11 @@ const downvoteAnswer = async (req, res) => {
         )
         res.status(200).json({ msg: "Answer Downvoted" });
         } catch (err){
-        return res.status(400).json({ error: err.message })
+        return res.status(400).json({
+            is_success: false,
+            message: err.message,
+            data: null,
+          })
     };
 }
 
