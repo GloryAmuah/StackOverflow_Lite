@@ -15,4 +15,3 @@ router.put('/:id/downvote', checkAuthMiddleware.checkAuth, answersController.dow
 
 
 module.exports = router;
-
