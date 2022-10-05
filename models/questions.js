@@ -18,10 +18,6 @@ module.exports = (sequelize, DataTypes) => {
   }
   questions.init(
   {
-    uuid: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4
-    },
     title: {
       allowNull: false,
       type: DataTypes.STRING

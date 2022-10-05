@@ -16,10 +16,6 @@ module.exports = (sequelize, DataTypes) => {
   }
   answers.init(
   {
-    uuid: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4
-    },
     answer: {
       allowNull: false,
       type: DataTypes.STRING

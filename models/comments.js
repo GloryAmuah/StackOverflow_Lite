@@ -15,10 +15,6 @@ module.exports = (sequelize, DataTypes) => {
   }
   comments.init(
   {
-    uuid: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4
-    },
     comment: {
       allowNull: false,
       type: DataTypes.STRING
