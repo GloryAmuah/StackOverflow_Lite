@@ -15,15 +15,10 @@ answer.
 9. Users can fetch all questions he/she has ever asked on the platform
 
 ## Tools
-Server side Framework: Node/Express
-ORM: Sequelize
-Database: MySQL
+Server side Framework: Node/Express\
+ORM: Sequelize\
+Database: MySQL\
 Testing Framework: Mocha​ 
-
-## Endpoints
-### User endpoints
-### Question endpoints
-### Answer endpoints
 
 ## Author
 Glory Amuah
