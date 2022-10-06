@@ -22,5 +22,3 @@ Testing Framework: Mocha​
 
 ## Author
 Glory Amuah
-
-
